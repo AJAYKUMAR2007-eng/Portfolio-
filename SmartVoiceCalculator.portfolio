@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A. Ajaykumar — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eeece2;
+    --paper: #f8f6ee;
+    --line: #d9d5c4;
+    --ink: #2b2a25;
+    --ink-dim: #6b6a5f;
+    --forest: #3f6b4c;
+    --clay: #b5583c;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1c1b17; --paper: #24231e; --line: #3a3830;
+      --ink: #ece9de; --ink-dim: #a6a396; --forest: #7bb08e; --clay: #e0876a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1c1b17; --paper: #24231e; --line: #3a3830;
+    --ink: #ece9de; --ink-dim: #a6a396; --forest: #7bb08e; --clay: #e0876a;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 2.6rem 1.4rem 5rem; }
+  .serif { font-family: 'Fraunces', Georgia, serif; }
+
+  /* ---- ID card hero ---- */
+  .card {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 4px;
+    padding: 1.7rem 1.6rem;
+  }
+  .card-strip {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 0.72rem; letter-spacing: 0.04em; color: var(--ink-dim);
+    border-bottom: 1px dashed var(--line); padding-bottom: 0.7rem; margin-bottom: 1.2rem;
+  }
+  .card-body { display: flex; gap: 1.3rem; align-items: center; }
+  .avatar {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--forest); color: var(--paper);
+    display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif;
+    font-size: 1.4rem; font-weight: 600; flex-shrink: 0;
+  }
+  .card-name { font-size: 1.65rem; font-weight: 600; margin: 0 0 0.2rem; }
+  .card-role { color: var(--clay); font-size: 0.98rem; margin: 0 0 0.15rem; }
+  .card-sub { color: var(--ink-dim); font-size: 0.88rem; margin: 0; }
+
+  /* ---- Sections ---- */
+  section { margin-top: 3rem; }
+  .sec-title {
+    font-size: 1.1rem; font-weight: 600; margin: 0 0 1rem;
+    display: flex; align-items: center; gap: 0.55rem;
+  }
+  .sec-title::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--forest); flex-shrink: 0;
+  }
+  p { color: var(--ink-dim); max-width: 60ch; margin: 0; }
+  a { color: var(--forest); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover, a:focus-visible { border-bottom-color: var(--forest); }
+  a:focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---- Skills list ---- */
+  .skills { list-style: none; margin: 0; padding: 0; }
+  .skills li {
+    padding: 0.6rem 0; border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; font-size: 0.95rem;
+  }
+  .skills li:last-child { border-bottom: none; }
+  .skills .status { color: var(--ink-dim); font-size: 0.82rem; }
+  .skills .status.active { color: var(--clay); }
+
+  /* ---- Projects ---- */
+  .project {
+    border-left: 3px solid var(--forest); padding: 0.15rem 0 0.15rem 1.05rem; margin-bottom: 1.5rem;
+  }
+  .project:last-child { margin-bottom: 0; }
+  .project-name { font-weight: 600; font-size: 1.03rem; }
+  .project-tool { display: block; color: var(--clay); font-size: 0.82rem; margin: 0.15rem 0 0.5rem; }
+  .project p { font-size: 0.95rem; }
+  .project ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
+  .project ul li { font-size: 0.9rem; color: var(--ink-dim); margin-bottom: 0.25rem; }
+
+  /* ---- Rows (education/learning/achievement) ---- */
+  .row { padding: 0.2rem 0; }
+  .row-title { font-weight: 600; font-size: 1rem; }
+  .row-sub { color: var(--ink-dim); font-size: 0.9rem; margin-top: 0.15rem; }
+  .progress-bar { height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; margin-top: 0.7rem; max-width: 240px; }
+  .progress-fill { height: 100%; width: 55%; background: var(--clay); border-radius: 3px; }
+
+  /* ---- Interests ---- */
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    font-size: 0.83rem; color: var(--ink); background: var(--paper); border: 1px solid var(--line);
+    border-radius: 999px; padding: 0.35rem 0.8rem;
+  }
+
+  /* ---- Contact ---- */
+  .contact-list { display: flex; flex-direction: column; gap: 0.55rem; font-size: 0.98rem; }
+  .contact-list span { color: var(--ink-dim); display: inline-block; width: 4.6rem; }
+
+  footer { margin-top: 4rem; color: var(--ink-dim); font-size: 0.78rem; }
+
+  @media (max-width: 480px) {
+    .card-body { gap: 1rem; }
+    .card-name { font-size: 1.4rem; }
+    .wrap { padding: 2rem 1.1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="card">
+    <div class="card-strip">
+      <span>GCT COIMBATORE</span>
+      <span>STUDENT PROFILE</span>
+    </div>
+    <div class="card-body">
+      <div class="avatar serif">AA</div>
+      <div>
+        <p class="serif card-name">A. Ajaykumar</p>
+        <p class="card-role">2nd Year B.E. CSE (AI &amp; ML) Student</p>
+        <p class="card-sub">Government College of Technology (GCT), Coimbatore</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="sec-title serif">About</h2>
+    <p>I'm A. Ajaykumar, a 2nd year B.E. Computer Science and Engineering (AI &amp; ML) student at Government College of Technology (GCT), Coimbatore. I have hands-on experience building voice-enabled applications and project websites, and I'm currently exploring game development. I enjoy learning new technical skills and turning them into practical, working projects.</p>
+  </section>
+
+  <section>
+    <h2 class="sec-title serif">Technical Skills</h2>
+    <ul class="skills">
+      <li>Python Programming <span class="status">academic</span></li>
+      <li>Java <span class="status active">learning — NPTEL</span></li>
+      <li>Data Structures <span class="status">problem solving</span></li>
+      <li>Machine Learning Engineering <span class="status">fundamentals</span></li>
+      <li>Software Development <span class="status">core</span></li>
+      <li>Application Development <span class="status">skill</span></li>
+      <li>Game Development <span class="status">no-code</span></li>
+      <li>GitHub &amp; Portfolio Development <span class="status">skill</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="sec-title serif">Projects</h2>
+
+    <div class="project">
+      <span class="project-name">Smart Voice Calculator</span>
+      <span class="project-tool">Project</span>
+      <p>A calculator project that accepts voice commands to perform calculations, alongside standard input handling.</p>
+      <ul>
+        <li>Designed and built the core voice-command calculation logic for the project.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <span class="project-name">Smart Voice Calculator — Project Website</span>
+      <span class="project-tool">Web Development</span>
+      <p>Built a website to showcase and document the Smart Voice Calculator project.</p>
+      <ul>
+        <li>Presented the project's features and working through a dedicated project website.</li>
+      </ul>
+    </div>
+
+    <div class="project" style="margin-bottom:0;">
+      <span class="project-name">Game Project (In Progress)</span>
+      <span class="project-tool">Game Development</span>
+      <p>Currently developing a game, applying programming and game-development concepts.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title serif">Education</h2>
+    <div class="row">
+      <div class="row-title">B.E., Computer Science and Engineering — Artificial Intelligence &amp; Machine Learning</div>
+      <div class="row-sub">Government College of Technology (GCT), Coimbatore — 2nd Year</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title serif">Currently Learning</h2>
+    <div class="row">
+      <div class="row-title">Java Programming — NPTEL</div>
+      <div class="row-sub">Strengthening object-oriented programming and application-development fundamentals.</div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+    <div class="row" style="margin-top:1.2rem;">
+      <div class="row-title">Python Programming — Academic (Ongoing)</div>
+      <div class="row-sub">Learning Python programming as part of academic coursework, currently ongoing.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title serif">Achievements</h2>
+    <div class="row-title" style="margin-bottom:0.6rem;">Microsoft Learn Achievements</div>
+    <ul class="skills">
+      <li>Implement Real-Time Intelligence with Microsoft Fabric <span class="status active">Trophy</span></li>
+      <li>Get started with AI applications and agents on Azure <span class="status active">Trophy</span></li>
+      <li>Deploy and operate Microsoft Security Copilot <span class="status active">Trophy</span></li>
+      <li>Describe the concepts of cybersecurity <span class="status active">Trophy</span></li>
+      <li>Introduction to Microsoft security solutions <span class="status active">Trophy</span></li>
+      <li>Introduction to security, compliance, and identity concepts <span class="status active">Trophy</span></li>
+      <li>Work smarter with AI <span class="status active">Trophy</span></li>
+      <li>Transform ideas into action with Copilot Chat (Basic) <span class="status active">Trophy</span></li>
+      <li>AI Fluency <span class="status active">Trophy</span></li>
+      <li>Microsoft 365: Copilot Chat Explorer <span class="status">Badge</span></li>
+      <li>Code: Without Barriers: Work smarter with AI using Microsoft Copilot <span class="status">Badge</span></li>
+    </ul>
+    <div class="row" style="margin-top:1.4rem;">
+      <div class="row-title">Additional Achievement</div>
+      <div class="row-sub">Microsoft Learn — Earned multiple Microsoft Learn badges and trophies through successful completion of Microsoft learning modules and assessments.</div>
+    </div>
+    <div class="row" style="margin-top:1.2rem;">
+      <div class="row-title">Other Professional Learning</div>
+      <div class="row-sub">Java Programming – NPTEL — Currently learning Java through NPTEL to strengthen programming and technical skills.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title serif">Professional Interests</h2>
+    <div class="tags">
+      <span class="tag">AI &amp; Machine Learning</span>
+      <span class="tag">Python Programming</span>
+      <span class="tag">Machine Learning Engineering</span>
+      <span class="tag">Software Development</span>
+      <span class="tag">Data Structures &amp; Problem Solving</span>
+      <span class="tag">Application Development</span>
+      <span class="tag">Game &amp; No-Code Development</span>
+      <span class="tag">GitHub &amp; Portfolio Development</span>
+      <span class="tag">AI-Based Real-World Solutions</span>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title serif">Contact</h2>
+    <div class="contact-list">
+      <div><span>Email</span><a href="mailto:ajaykumar2007ac@gmail.com">ajaykumar2007ac@gmail.com</a></div>
+      <div><span>GitHub</span><a href="https://github.com/AJAYKUMAR2007-eng" target="_blank" rel="noopener">github.com/AJAYKUMAR2007-eng</a></div>
+    </div>
+  </section>
+
+  <footer>© 2026 A. Ajaykumar</footer>
+</div>
+</body>
+</html>
